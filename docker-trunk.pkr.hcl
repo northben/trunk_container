@@ -11,6 +11,18 @@ variable "aws_ecr_repository" {
   type = string
 }
 
+variable "trunk_callback_address" {
+  type = string
+}
+
+variable "trello_key" {
+  type = string
+}
+
+variable "trello_token" {
+  type = string
+}
+
 source "docker" "trunk" {
   image  = var.splunk_image
   commit = true
@@ -43,6 +55,16 @@ build {
     destination = "/tmp/TA-trello-webhook/"
   }
 
+  provisioner "file" {
+    content      = templatefile("files/northben_ta_trello_webhook_input.pkrtpl.hcl",
+    {
+      callback_address = var.trunk_callback_address,
+      trello_key = var.trello_key,
+      trello_token = var.trello_token,
+    })
+    destination = "/tmp/northben_ta_trello_webhook_input.conf"
+  }
+
   provisioner "shell" {
     inline = [
       "cd /opt/splunk/",
@@ -50,6 +72,7 @@ build {
       "tar xzf /tmp/webhooks_input.tar.gz -C etc/apps/",
       "mkdir -p etc/apps/webhooks_input/local/",
       "mv /tmp/trello_webhook_input.conf etc/apps/webhooks_input/local/inputs.conf",
+      "mv /tmp/northben_ta_trello_webhook_input.conf etc/apps/TA-trello-webhook/local/inputs.conf",
       "chown -R root: etc/apps/TA-trello-webhook",
     ]
   }

@@ -1,0 +1,75 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "packer build all",
+            "type": "shell",
+            "command": "packer build .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer build splunk",
+            "type": "shell",
+            "command": "packer build -only=splunk.docker.linux .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer build ubuntu-bgn",
+            "type": "shell",
+            "command": "packer build -only=ubuntu-bgn.docker.ubuntu .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer build trunk",
+            "type": "shell",
+            "command": "packer build -only=trunk.docker.trunk .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer build download splunk",
+            "type": "shell",
+            "command": "packer build -only=roles.null.download .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer init",
+            "type": "shell",
+            "command": "packer init .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "packer validate",
+            "type": "shell",
+            "command": "packer validate .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

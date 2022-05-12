@@ -1,8 +1,3 @@
-variable "docker_image" {
-  type = string
-  default = "ubuntu"
-}
-
 variable "splunk_image" {
   type = string
   default = "splunk"
@@ -62,7 +57,7 @@ build {
     inline = [
       "cd /opt/splunk",
       "./bin/splunk clean eventdata -f",
-      "rm -rf /tmp/splunk.tgz /tmp/Splunk.License var/lib/splunk/kvstore/mongo/",
+      "rm -rf /tmp/splunk.tgz /tmp/Splunk.License var/lib/splunk/",
     ]
     pause_before = "15s"
   }

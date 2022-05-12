@@ -14,7 +14,7 @@ variable "base_image" {
 
 variable "linux_image" {
   type = string
-  default = "ubuntu-bgn"
+  default = "linux_base"
 }
 
 source "docker" "ubuntu" {

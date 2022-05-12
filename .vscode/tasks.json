@@ -22,9 +22,9 @@
             }
         },
         {
-            "label": "packer build ubuntu-bgn",
+            "label": "packer build linux base",
             "type": "shell",
-            "command": "packer build -only=ubuntu-bgn.docker.ubuntu .",
+            "command": "packer build -only=linux_base.docker.ubuntu .",
             "problemMatcher": [],
             "group": {
                 "kind": "build",

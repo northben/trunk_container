@@ -18,9 +18,32 @@ Create container
 1. Rename __variables.auto.pkrvars.hcl_default__ to __variables.auto.pkrvars.hcl__
 1. Provide values for empty variables
 1. Add your __Splunk.license__ file to the __files__ directory. To create a container without a license, remove the __provisioner__ stanza and `add license` command from __docker-splunk.pkr.hcl__.
-1. Run `packer build .`
+1. Build the Packer containers in order
+    1. `packer build -only=roles.null.download .` or VS Code: `packer build download splunk`
+    1. `packer build -only=linux_base.docker.ubuntu .` or VS Code: `packer build linux base`
+    1. `packer build -only=splunk.docker.linux .` or VS Code: `packer build splunk`
+    1. `packer build -only=trunk.docker.trunk .` or VS Code: `packer build trunk`
 
 Additional info
 ---
 
-The `packer build` command is provided for VS Code. Use keyboard shortcut: `⌘ ⇧ B` and select __packer build all__.
+The `packer build` commands are provided for VS Code. Use keyboard shortcut: `⌘ ⇧ B` and select __packer build ...__.
+
+
+Development
+---
+
+Run the docker container locally with the Trunk app mapped from a local git repo:
+
+```
+docker rm trunk; 
+docker run -it -p 8000:8000 --name trunk -v $(pwd)/../trunk/trunk:/opt/splunk/etc/apps/trunk trunk:latest
+```
+
+Connect to the docker container shell:
+
+`docker exec -it trunk bash`
+
+Connect to Splunk web:
+
+`http://localhost:8000`

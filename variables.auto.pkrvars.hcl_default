@@ -1,0 +1,15 @@
+splunk_download_url = "https://download.splunk.com/products/splunk/releases/8.2.6/linux/splunk-8.2.6-a6fe1ee8894b-Linux-x86_64.tgz"
+
+webhooks_download_url = "https://github.com/LukeMurphey/splunk-webhooks-input/releases/download/1.2.4/webhooks_input.tar.gz"
+
+splunk_password = ""
+
+aws_profile = ""
+
+aws_ecr_repository = "111111111111.dkr.ecr.us-east-2.amazonaws.com"
+
+trunk_callback_address = ""
+
+trello_key = ""
+
+trello_token = ""

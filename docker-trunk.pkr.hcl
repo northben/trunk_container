@@ -51,8 +51,13 @@ build {
   }
 
   provisioner "file" {
-    source      = "${path.root}/../TA-trello-webhook/TA-trello-webhook/"
-    destination = "/tmp/TA-trello-webhook/"
+    source      = "files/ta_trello_webhook.tgz"
+    destination = "/tmp/ta_trello_webhook.tgz"
+  }
+
+  provisioner "file" {
+    source = "files/trunk.tgz"
+    destination = "/tmp/trunk.tgz"
   }
 
   provisioner "file" {
@@ -68,12 +73,20 @@ build {
   provisioner "shell" {
     inline = [
       "cd /opt/splunk/",
-      "mv /tmp/TA-trello-webhook etc/apps/",
       "tar xzf /tmp/webhooks_input.tar.gz -C etc/apps/",
+      "tar xzf /tmp/ta_trello_webhook.tgz -C etc/apps/",
+      "tar xzf /tmp/trunk.tgz -C etc/apps/",
       "mkdir -p etc/apps/webhooks_input/local/",
       "mv /tmp/trello_webhook_input.conf etc/apps/webhooks_input/local/inputs.conf",
+      "mkdir -p etc/apps/TA-trello-webhook/local/",
       "mv /tmp/northben_ta_trello_webhook_input.conf etc/apps/TA-trello-webhook/local/inputs.conf",
       "chown -R root: etc/apps/TA-trello-webhook",
+    ]
+  }
+
+  provisioner "shell" {
+    inline = [
+      "rm -rf /tmp/webhooks_input.tar.gz /tmp/ta_trello_webhook.tgz /tmp/trunk.tgz",
     ]
   }
 
